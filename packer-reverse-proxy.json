@@ -1,0 +1,53 @@
+{
+    "builders": [
+        {
+            "type": "amazon-ebs",
+            "name": "reverse-proxy-ami-ap-northeast-1",
+            "ami_description": "reverse-proxy (ap-northeast-1)",
+            "region": "ap-northeast-1",
+            "source_ami": "ami-bbc680dc",
+            "instance_type": "t2.nano",
+            "ssh_username": "ubuntu",
+            "ami_name": "reverse-proxy-ami-{{timestamp}}",
+            "tags": {
+                "Name": "reverse-proxy-ami-{{timestamp}}"
+            },
+            "ami_block_device_mappings": [
+                {
+                    "device_name": "/dev/sda1",
+                    "volume_size": 8,
+                    "volume_type": "gp2",
+                    "delete_on_termination": true
+                }
+            ],
+            "launch_block_device_mappings": [
+                {
+                    "device_name": "/dev/sda1",
+                    "volume_size": 8,
+                    "volume_type": "gp2",
+                    "delete_on_termination": true
+                }
+            ],
+            "vpc_id": "vpc-78791d1c",
+            "subnet_id": "subnet-bcf49ae4",
+            "associate_public_ip_address": true,
+            "security_group_ids": [
+                "sg-02d6c965"
+            ],
+            "communicator": "ssh",
+            "ssh_pty": true
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "shell",
+            "execute_command": "chmod +x {{ .Path }}; sudo '{{ .Path }}' --proxy",
+            "scripts": [
+                "provision-common.sh",
+                "provision-codedeploy.sh",
+                "provision-reverse-proxy.sh",
+                "provision-cleanup.sh"
+            ]
+        }
+    ]
+}
