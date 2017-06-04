@@ -28,12 +28,7 @@
                     "delete_on_termination": true
                 }
             ],
-            "vpc_id": "vpc-78791d1c",
-            "subnet_id": "subnet-bcf49ae4",
             "associate_public_ip_address": true,
-            "security_group_ids": [
-                "sg-02d6c965"
-            ],
             "communicator": "ssh",
             "ssh_pty": true
         }

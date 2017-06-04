@@ -8,8 +8,8 @@ PROFILE?= onepiece2money
 build:
 	@echo 'Use "make <something>" to build AMIs.'
 
-ntp:
-	AWS_PROFILE=${PROFILE} packer build packer-ntp.json
+reverse-proxy:
+	AWS_PROFILE=${PROFILE} packer build packer-reverse-proxy.json
 
 php70:
 	AWS_PROFILE=${PROFILE} packer build packer-template-php70.json
