@@ -2,7 +2,7 @@
 
 Automated build AWS AMI images.
 
-### Features
+## Features
 
 - apache2.4 + php7.0 
 
@@ -10,11 +10,11 @@ Automated build AWS AMI images.
 
 - nginx reverse proxy
 
-### Requirement
+## Requirement
 
 - aws cli (with access/secret key)
 
-### HowTo
+## HowTo
 
 You can use `make` build AMI.
 
