@@ -1,0 +1,31 @@
+{
+    "builders": [
+        {
+            "type": "amazon-ebs",
+            "name": "unbound-ami",
+            "ami_description": "simple dns resolver solution",
+            "region": "us-east-1",
+            "source_ami": "ami-0947d2ba12ee1ff75",
+            "instance_type": "t3.nano",
+            "ssh_username": "ec2-user",
+            "ami_name": "unbound-dns-ami-{{timestamp}}",
+            "tags": {
+                "Name": "unbound-dns-ami-{{timestamp}}"
+            },
+            "associate_public_ip_address": true,
+            "communicator": "ssh",
+            "ssh_pty": true
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "shell",
+            "execute_command": "chmod +x {{ .Path }}",
+            "scripts": [
+                "provisions/common.sh",
+                "provisions/unbound.sh",
+                "provisions/cleanup.sh"
+            ]
+        }
+    ]
+}
